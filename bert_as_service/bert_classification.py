@@ -81,7 +81,6 @@ class DNN:
         #     feature = tf.concat([prefix_feature, title_feature, self.tag], 1)
 
         with tf.name_scope("dense"):
-            tf.layers.L
             dense = tf.layers.dense(inputs=self.feature, units=512, activation=tf.nn.relu, \
                                     kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
             drop_dense = tf.layers.dropout(dense, rate=self.dropout, training=True)
