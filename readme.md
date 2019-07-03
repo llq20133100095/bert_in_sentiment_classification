@@ -4,7 +4,7 @@
 
 1. bert_as_service/download_glue_data.py：下载 GLUE data
 
-命令：
+- 运行命令：
 ```
 python3 download_glue_data.py --data_dir glue_data --tasks all`
 ```
