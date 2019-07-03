@@ -147,7 +147,7 @@ class DNN:
                 loss_epoch.append(e)
                 ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
 
-                f1_sco = f1_score(y_val, np.argmax(ypred_val, axis=1))
+                f1_sco = f1_score(y_val, np.reshape(np.argmax(ypred_val, axis=1), (-1,)))
                 print("val loss: %f" % np.mean(loss_epoch))
                 print("f1_score: %f" % f1_sco)
 
