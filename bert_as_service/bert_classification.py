@@ -20,7 +20,7 @@ class DNN:
     def __init__(self):
         self.logdir = '../summary'
         self.checking_point_dir = "../checkpoint_dir"
-        self.epochs = 30
+        self.epochs = 80
         self.batch_size = 500
         self.model_name = "dnn_" + str(self.batch_size)
         self.regularizer = 0.001
@@ -183,7 +183,3 @@ if __name__ == "__main__":
 
     dnn = DNN()
     dnn.dnn_model(feature_vet, label, label_one_hot)
-
-    # true = [0, 2, 2, 1]
-    # pre = [1, 2, 3, 4]
-    # print(f1_score(true, pre, average='macro'))
