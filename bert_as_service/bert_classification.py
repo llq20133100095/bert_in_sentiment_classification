@@ -66,11 +66,12 @@ class DNN:
                 excerpt = slice(start_idx, start_idx + batchsize)
             yield x[excerpt], y[excerpt]
 
-    def dnn_model(self, feature_vet, label):
+    def dnn_model(self, feature_vet, label, label_one_hot):
         """
         build the dnn model
         :param feature_vet:
         :param label:
+        :param label_one_hot: one hot
         :return:
         """
         # with tf.name_scope("embedding"):
@@ -106,7 +107,7 @@ class DNN:
         # split train_data: train and val
         skf = StratifiedKFold(n_splits=self.N, random_state=self.seed, shuffle=True)
         for k, (train_in, test_in) in enumerate(skf.split(feature_vet, label)):
-            x_train, x_val, y_train, y_val = feature_vet[train_in], feature_vet[test_in], label[train_in], label[test_in]
+            x_train, x_val, y_train, y_val = feature_vet[train_in], feature_vet[test_in], label_one_hot[train_in], label_one_hot[test_in]
             break
 
         best_f1_score = 0
@@ -177,10 +178,14 @@ if __name__ == "__main__":
 
     # label to one_hot
     one_hot_ec = OneHotEncoder()
-    label = one_hot_ec.fit_transform(label)
-    label = label.toarray()
+    label_one_hot = one_hot_ec.fit_transform(label)
+    # label = label.toarray()
 
     dnn = DNN()
-    dnn.dnn_model(feature_vet, label)
+    dnn.dnn_model(feature_vet, label, label_one_hot)
 
-
+    # # split train_data: train and val
+    # skf = StratifiedKFold(n_splits=10, random_state=2019, shuffle=True)
+    # for k, (train_in, test_in) in enumerate(skf.split(feature_vet, label)):
+    #     x_train, x_val, y_train, y_val = feature_vet[train_in], feature_vet[test_in], label[train_in], label[test_in]
+    #     break
