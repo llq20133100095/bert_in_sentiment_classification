@@ -18,6 +18,6 @@ if __name__ == "__main__":
 
     #get embedding
     bc = BertClient()
-    feature = bc.encode(text.to_list()[0:2])
+    feature = bc.encode(['hey you', 'whats up?'])
     print(feature[0])
     print(feature.shape)
