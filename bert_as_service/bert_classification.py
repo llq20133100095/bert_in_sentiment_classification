@@ -32,7 +32,7 @@ class DNN:
 
         with tf.name_scope("inputs"):
             self.target = tf.placeholder(tf.float32, shape=(None, self.label), name="target")
-            self.feature = tf.placeholder(tf.float32, shape=(None, self.max_sen_len, self.vet_size), name="input")
+            self.feature = tf.placeholder(tf.float32, shape=(None, self.vet_size), name="input")
             self.dropout = tf.placeholder(tf.float32, name="dropout")
 
     def mkdir(self, path):
@@ -81,6 +81,7 @@ class DNN:
         #     feature = tf.concat([prefix_feature, title_feature, self.tag], 1)
 
         with tf.name_scope("dense"):
+            tf.layers.L
             dense = tf.layers.dense(inputs=self.feature, units=512, activation=tf.nn.relu, \
                                     kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
             drop_dense = tf.layers.dropout(dense, rate=self.dropout, training=True)
@@ -183,9 +184,3 @@ if __name__ == "__main__":
 
     dnn = DNN()
     dnn.dnn_model(feature_vet, label, label_one_hot)
-
-    # # split train_data: train and val
-    # skf = StratifiedKFold(n_splits=10, random_state=2019, shuffle=True)
-    # for k, (train_in, test_in) in enumerate(skf.split(feature_vet, label)):
-    #     x_train, x_val, y_train, y_val = feature_vet[train_in], feature_vet[test_in], label[train_in], label[test_in]
-    #     break
