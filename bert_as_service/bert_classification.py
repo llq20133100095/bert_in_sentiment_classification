@@ -5,7 +5,9 @@
 @function:
     1.bert embedding in classification
 """
+from bert_serving.client import BertClient
+
 
 if __name__ == "__main__":
-
-    print(1)
+    bc = BertClient()
+    bc.encode(['First do it', 'then do it right', 'then do it better'])
