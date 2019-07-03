@@ -24,8 +24,8 @@ from tensorflow.python.estimator.training import TrainSpec, EvalSpec, train_and_
 os.environ['CUDA_VISIBLE_DEVICES'] = str(GPUtil.getFirstAvailable()[0])
 tf.logging.set_verbosity(tf.logging.INFO)
 
-train_fp = ['/data/cips/data/lab/data/dataset/final_all_data/exercise_contest/data_train.json']
-eval_fp = ['/data/cips/data/lab/data/dataset/final_all_data/exercise_contest/data_test.json']
+train_fp = ['~/liluoqin/bert_as_service/final_all_data/exercise_contest/data_train.json']
+eval_fp = ['~/liluoqin/bert_as_service/final_all_data/exercise_contest/data_test.json']
 
 batch_size = 128
 num_parallel_calls = 4
