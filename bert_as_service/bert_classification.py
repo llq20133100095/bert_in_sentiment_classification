@@ -117,7 +117,7 @@ class DNN:
                 start = time.time()
                 # train
                 loss_epoch = []
-                for batch in self.iterate_minibatches(x_train, y_train, shuffle=True):
+                for batch in self.iterate_minibatches(x_train, y_train, self.batch_size, shuffle=True):
                     x, y = batch
                     feed_dict_train = {
                         self.feature: x,
