@@ -9,6 +9,7 @@ from bert_serving.client import BertClient
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import f1_score
+from sklearn.preprocessing import OneHotEncoder
 import tensorflow as tf
 import os
 import time
@@ -154,7 +155,7 @@ class DNN:
                 saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
                 print("time: %f s" % (time.time() - start))
 
-                #get best f1_score
+                # get best f1_score
                 if(best_f1_score < f1_sco):
                     best_f1_score = f1_sco
                     best_epoch = epoch
@@ -167,12 +168,16 @@ if __name__ == "__main__":
     # read the all data
     file_open = open("../data/train_data.csv", encoding="gbk")
     data = pd.read_csv(file_open)
-    label = data['label']
+    label = np.reshape(np.array(data['label']), (-1, 1)) + 1
     text = data['scontent']
 
-    #get embedding
+    # get embedding
     bc = BertClient()
     feature_vet = bc.encode(text.to_list())
+
+    # label to one_hot
+    one_hot_ec = OneHotEncoder()
+    label = one_hot_ec.fit_transform(label)
 
     dnn = DNN()
     dnn.dnn_model(feature_vet, label)
