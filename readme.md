@@ -4,7 +4,7 @@
 
 ```angular2
 cd /home/zhangxiang2/.local/bin
-python3 bert-serving-start -model_dir ~/liluoqin/bert_as_service/chinese_L-12_H-768_A-12 -num_worker=4
+python3 bert-serving-start -pooling_strategy NONE -model_dir ~/liluoqin/bert_as_service/chinese_L-12_H-768_A-12 -num_worker=4
 ```
 
 - 其中“chinese_L-12_H-768_A-12”是bert预训练好的模型
