@@ -147,7 +147,7 @@ class DNN:
                 loss_epoch.append(e)
                 ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
 
-                f1_sco = f1_score(y_val, np.argmax(ypred_val, axis=1), average='macro')
+                f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
                 print("val loss: %f" % np.mean(loss_epoch))
                 print("f1_score: %f" % f1_sco)
 
@@ -183,3 +183,7 @@ if __name__ == "__main__":
 
     dnn = DNN()
     dnn.dnn_model(feature_vet, label, label_one_hot)
+
+    # true = [0, 2, 2, 1]
+    # pre = [1, 2, 3, 4]
+    # print(f1_score(true, pre, average='macro'))
