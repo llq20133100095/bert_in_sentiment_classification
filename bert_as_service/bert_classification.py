@@ -179,7 +179,7 @@ if __name__ == "__main__":
     # label to one_hot
     one_hot_ec = OneHotEncoder()
     label_one_hot = one_hot_ec.fit_transform(label)
-    # label = label.toarray()
+    label_one_hot = label_one_hot.toarray()
 
     dnn = DNN()
     dnn.dnn_model(feature_vet, label, label_one_hot)
