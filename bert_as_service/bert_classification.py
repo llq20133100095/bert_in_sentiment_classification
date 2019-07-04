@@ -108,26 +108,26 @@ class DNN:
             # outputs = tf.transpose(outputs, [1, 0, 2])
 
 
-        with tf.name_scope("dense"):
-            dense = tf.layers.dense(inputs=fin_outputs, units=self.hidden_dense, activation=tf.nn.relu, \
-                                    kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
-            drop_dense = tf.layers.dropout(dense, rate=self.dropout, training=True)
-            y_pred = tf.layers.dense(inputs=drop_dense, units=self.label, activation=tf.nn.softmax, \
-                                     kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
-
-        with tf.name_scope("Loss"):
-            logloss = -tf.reduce_mean(tf.log(y_pred) * self.target) \
-                      + tf.losses.get_regularization_loss()
-            tf.summary.scalar('loss', logloss)
-
-        with tf.name_scope("training_op"):
-            optimizer = tf.train.AdamOptimizer(self.lr)
-            training_op = optimizer.minimize(logloss)
-
-        # Summary
-        merged_summary = tf.summary.merge_all()
-        self.mkdir(self.logdir)
-        summary_writer = tf.summary.FileWriter(self.logdir, tf.get_default_graph())
+        # with tf.name_scope("dense"):
+        #     dense = tf.layers.dense(inputs=fin_outputs, units=self.hidden_dense, activation=tf.nn.relu, \
+        #                             kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
+        #     drop_dense = tf.layers.dropout(dense, rate=self.dropout, training=True)
+        #     y_pred = tf.layers.dense(inputs=drop_dense, units=self.label, activation=tf.nn.softmax, \
+        #                              kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
+        #
+        # with tf.name_scope("Loss"):
+        #     logloss = -tf.reduce_mean(tf.log(y_pred) * self.target) \
+        #               + tf.losses.get_regularization_loss()
+        #     tf.summary.scalar('loss', logloss)
+        #
+        # with tf.name_scope("training_op"):
+        #     optimizer = tf.train.AdamOptimizer(self.lr)
+        #     training_op = optimizer.minimize(logloss)
+        #
+        # # Summary
+        # merged_summary = tf.summary.merge_all()
+        # self.mkdir(self.logdir)
+        # summary_writer = tf.summary.FileWriter(self.logdir, tf.get_default_graph())
 
         # init
         init = tf.global_variables_initializer()
@@ -143,7 +143,7 @@ class DNN:
         with tf.Session() as sess:
             sess.run(init)
 
-            for epoch in range(self.epochs):
+            for epoch in range(1):
                 start = time.time()
                 # train
                 loss_epoch = []
@@ -155,42 +155,44 @@ class DNN:
                         self.dropout: 0.5,
                     }
 
-                    sess.run(training_op, feed_dict_train)
-                    e, summary = sess.run([logloss, merged_summary], feed_dict_train)
-                    loss_epoch.append(e)
-
-                summary_writer.add_summary(summary, epoch)
-                print("epoch: %d" % epoch)
-                print("train loss: %f" % np.mean(loss_epoch))
-
-                # val:
-                loss_epoch = []
-                feed_dict_val = {
-                    self.feature: x_val,
-                    self.target: y_val,
-                    self.dropout: 0.0,
-                }
-
-                e = logloss.eval(feed_dict=feed_dict_val)
-                loss_epoch.append(e)
-                ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
-
-                f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
-                print("val loss: %f" % np.mean(loss_epoch))
-                print("f1_score: %f" % f1_sco)
-
-                saver = tf.train.Saver()
-                self.mkdir(self.checking_point_dir)
-                saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
-                print("time: %f s" % (time.time() - start))
-
-                # get best f1_score
-                if(best_f1_score < f1_sco):
-                    best_f1_score = f1_sco
-                    best_epoch = epoch
-
-            print("best_f1_score: %f" % best_f1_score)
-            print("best_epoch: %d" % best_epoch)
+                print(fw_final_states.eval(feed_dict=feed_dict_train).shape)
+                print(bw_final_states.eval(feed_dict=feed_dict_train).shape)
+            #         sess.run(training_op, feed_dict_train)
+            #         e, summary = sess.run([logloss, merged_summary], feed_dict_train)
+            #         loss_epoch.append(e)
+            #
+            #     summary_writer.add_summary(summary, epoch)
+            #     print("epoch: %d" % epoch)
+            #     print("train loss: %f" % np.mean(loss_epoch))
+            #
+            #     # val:
+            #     loss_epoch = []
+            #     feed_dict_val = {
+            #         self.feature: x_val,
+            #         self.target: y_val,
+            #         self.dropout: 0.0,
+            #     }
+            #
+            #     e = logloss.eval(feed_dict=feed_dict_val)
+            #     loss_epoch.append(e)
+            #     ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
+            #
+            #     f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
+            #     print("val loss: %f" % np.mean(loss_epoch))
+            #     print("f1_score: %f" % f1_sco)
+            #
+            #     saver = tf.train.Saver()
+            #     self.mkdir(self.checking_point_dir)
+            #     saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
+            #     print("time: %f s" % (time.time() - start))
+            #
+            #     # get best f1_score
+            #     if(best_f1_score < f1_sco):
+            #         best_f1_score = f1_sco
+            #         best_epoch = epoch
+            #
+            # print("best_f1_score: %f" % best_f1_score)
+            # print("best_epoch: %d" % best_epoch)
 
 
 if __name__ == "__main__":
