@@ -15,20 +15,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bert_as_service/bert_classification.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="103" column="58" selection-start-line="103" selection-start-column="58" selection-end-line="103" selection-end-column="58" />
+            <state relative-caret-position="286">
+              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
               <folding>
                 <element signature="e#116#158#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/Anaconda/envs/py3/Lib/site-packages/tensorflow/python/ops/array_ops.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="1181" column="14" lean-forward="true" selection-start-line="1181" selection-start-column="14" selection-end-line="1181" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -249,12 +240,12 @@
       <option name="presentableId" value="Default" />
       <updated>1561970394938</updated>
       <workItem from="1561970396148" duration="3941000" />
-      <workItem from="1562062243001" duration="28457000" />
+      <workItem from="1562062243001" duration="28550000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32398000" />
+    <option name="totallyTimeSpent" value="32491000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -371,13 +362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda/envs/py3/Lib/site-packages/tensorflow/python/ops/array_ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="1181" column="14" lean-forward="true" selection-start-line="1181" selection-start-column="14" selection-end-line="1181" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -388,10 +372,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/Anaconda/envs/py3/Lib/site-packages/tensorflow/python/ops/array_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="1589" column="4" selection-start-line="1589" selection-start-column="4" selection-end-line="1589" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bert_as_service/bert_classification.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="103" column="58" selection-start-line="103" selection-start-column="58" selection-end-line="103" selection-end-column="58" />
+        <state relative-caret-position="286">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
           <folding>
             <element signature="e#116#158#0" expanded="true" />
           </folding>

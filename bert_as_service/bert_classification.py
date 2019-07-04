@@ -101,7 +101,7 @@ class DNN:
 
             # concat the fw and bw
             outputs = tf.concat(outputs, 2)
-            outputs = tf.transponse(outputs, [1, 0, 2])[-1]
+            outputs = tf.transpose(outputs, [1, 0, 2])[-1]
 
 
         with tf.name_scope("dense"):
