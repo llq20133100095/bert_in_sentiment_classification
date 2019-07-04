@@ -95,13 +95,13 @@ class DNN:
             # biases = tf.get_variable("biases", [n_classes], dtype=tf.float32,
             #                          initializer=tf.random_normal_initializer(mean=0, stddev=1))
 
-            # the para: time_major => [2, max_time, batch_size, depth]
+            # outputs => [2, batch_size, max_time, depth]
             outputs, final_states = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell, \
-                    self.feature, initial_state_fw=init_fw, initial_state_bw=init_bw, time_major=True)
+                    self.feature, initial_state_fw=init_fw, initial_state_bw=init_bw)
 
             # concat the fw and bw
             outputs = tf.concat(outputs, 2)
-            outputs = outputs[-1]
+            outputs = tf.transponse(outputs, [1, 0, 2])[-1]
 
 
         with tf.name_scope("dense"):
