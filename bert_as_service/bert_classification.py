@@ -102,7 +102,9 @@ class DNN:
 
 
             # concat the fw and bw
-            fin_outputs = tf.concat(final_states, 1)
+            fw_final_states = final_states[0].h
+            bw_final_states = final_states[1].h
+            fin_outputs = tf.concat((fw_final_states, bw_final_states), 1)
             # outputs = tf.transpose(outputs, [1, 0, 2])
 
 
