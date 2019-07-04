@@ -166,32 +166,32 @@ class DNN:
                 print("epoch: %d" % epoch)
                 print("train loss: %f" % np.mean(loss_epoch))
 
-            #     # val:
-            #     loss_epoch = []
-            #     feed_dict_val = {
-            #         self.feature: x_val,
-            #         self.target: y_val,
-            #         self.dropout: 0.0,
-            #     }
-            #
-            #     e = logloss.eval(feed_dict=feed_dict_val)
-            #     loss_epoch.append(e)
-            #     ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
-            #
-            #     f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
-            #     print("val loss: %f" % np.mean(loss_epoch))
-            #     print("f1_score: %f" % f1_sco)
-            #
-            #     saver = tf.train.Saver()
-            #     self.mkdir(self.checking_point_dir)
-            #     saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
-            #     print("time: %f s" % (time.time() - start))
-            #
-            #     # get best f1_score
-            #     if(best_f1_score < f1_sco):
-            #         best_f1_score = f1_sco
-            #         best_epoch = epoch
-            #
+                # val:
+                loss_epoch = []
+                feed_dict_val = {
+                    self.feature: x_val,
+                    self.target: y_val,
+                    self.dropout: 0.0,
+                }
+
+                e = logloss.eval(feed_dict=feed_dict_val)
+                loss_epoch.append(e)
+                ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
+
+                f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
+                print("val loss: %f" % np.mean(loss_epoch))
+                print("f1_score: %f" % f1_sco)
+
+                # saver = tf.train.Saver()
+                # self.mkdir(self.checking_point_dir)
+                # saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
+                # print("time: %f s" % (time.time() - start))
+                #
+                # # get best f1_score
+                # if(best_f1_score < f1_sco):
+                #     best_f1_score = f1_sco
+                #     best_epoch = epoch
+
             # print("best_f1_score: %f" % best_f1_score)
             # print("best_epoch: %d" % best_epoch)
 
