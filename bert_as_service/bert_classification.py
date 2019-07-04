@@ -179,7 +179,7 @@ class DNN:
                     e = logloss.eval(feed_dict=feed_dict_val)
                     loss_epoch.append(e)
                     ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
-                    y_val_true = np.concatenate((y_val_true, y_val), axis=0)
+                    y_val_true = np.concatenate((y_val_true, y), axis=0)
                     y_val_pre = np.concatenate((y_val_pre, ypred_val), axis=0)
 
                 f1_sco = f1_score(np.argmax(y_val_true[1:], axis=1), np.argmax(y_val_pre[1:], axis=1), average='macro')
