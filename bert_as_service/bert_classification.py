@@ -143,7 +143,7 @@ class DNN:
         with tf.Session() as sess:
             sess.run(init)
 
-            for epoch in range(1):
+            for epoch in range(self.epochs):
                 start = time.time()
                 # train
                 loss_epoch = []
@@ -155,45 +155,45 @@ class DNN:
                         self.dropout: 0.5,
                     }
 
-                print(fw_final_states.eval(feed_dict=feed_dict_train).shape)
-                print(bw_final_states.eval(feed_dict=feed_dict_train).shape)
-                print(y_pred.eval(feed_dict=feed_dict_train).shape)
-            #         sess.run(training_op, feed_dict_train)
-            #         e, summary = sess.run([logloss, merged_summary], feed_dict_train)
-            #         loss_epoch.append(e)
-            #
-            #     summary_writer.add_summary(summary, epoch)
-            #     print("epoch: %d" % epoch)
-            #     print("train loss: %f" % np.mean(loss_epoch))
-            #
-            #     # val:
-            #     loss_epoch = []
-            #     feed_dict_val = {
-            #         self.feature: x_val,
-            #         self.target: y_val,
-            #         self.dropout: 0.0,
-            #     }
-            #
-            #     e = logloss.eval(feed_dict=feed_dict_val)
-            #     loss_epoch.append(e)
-            #     ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
-            #
-            #     f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
-            #     print("val loss: %f" % np.mean(loss_epoch))
-            #     print("f1_score: %f" % f1_sco)
-            #
-            #     saver = tf.train.Saver()
-            #     self.mkdir(self.checking_point_dir)
-            #     saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
-            #     print("time: %f s" % (time.time() - start))
-            #
-            #     # get best f1_score
-            #     if(best_f1_score < f1_sco):
-            #         best_f1_score = f1_sco
-            #         best_epoch = epoch
-            #
-            # print("best_f1_score: %f" % best_f1_score)
-            # print("best_epoch: %d" % best_epoch)
+                # print(fw_final_states.eval(feed_dict=feed_dict_train).shape)
+                # print(bw_final_states.eval(feed_dict=feed_dict_train).shape)
+                # print(y_pred.eval(feed_dict=feed_dict_train).shape)
+                    sess.run(training_op, feed_dict_train)
+                    e, summary = sess.run([logloss, merged_summary], feed_dict_train)
+                    loss_epoch.append(e)
+
+                summary_writer.add_summary(summary, epoch)
+                print("epoch: %d" % epoch)
+                print("train loss: %f" % np.mean(loss_epoch))
+
+                # val:
+                loss_epoch = []
+                feed_dict_val = {
+                    self.feature: x_val,
+                    self.target: y_val,
+                    self.dropout: 0.0,
+                }
+
+                e = logloss.eval(feed_dict=feed_dict_val)
+                loss_epoch.append(e)
+                ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
+
+                f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
+                print("val loss: %f" % np.mean(loss_epoch))
+                print("f1_score: %f" % f1_sco)
+
+                saver = tf.train.Saver()
+                self.mkdir(self.checking_point_dir)
+                saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
+                print("time: %f s" % (time.time() - start))
+
+                # get best f1_score
+                if(best_f1_score < f1_sco):
+                    best_f1_score = f1_sco
+                    best_epoch = epoch
+
+            print("best_f1_score: %f" % best_f1_score)
+            print("best_epoch: %d" % best_epoch)
 
 
 if __name__ == "__main__":
