@@ -141,7 +141,7 @@ class DNN:
         with tf.Session() as sess:
             sess.run(init)
 
-            for epoch in range(self.epochs):
+            for epoch in range(1):
                 start = time.time()
                 # train
                 loss_epoch = []
@@ -153,10 +153,10 @@ class DNN:
                         self.dropout: 0.5,
                     }
 
-                outputs_rel = outputs.eval(feed_dict=feed_dict_train)
-                final_states_rel = final_states.eval(feed_dict=feed_dict_train)
-                print(outputs_rel[0])
-                print(final_states_rel[0].h)
+                outputs_rel = outputs[0].eval(feed_dict=feed_dict_train)
+                final_states_rel = final_states[0].eval(feed_dict=feed_dict_train)
+                print(outputs_rel)
+                print(final_states_rel.h)
                 # print(output_states[0].c.shape)
                 # print(output_states[0].h.shape)
                 # print(output_states[1].c.shape)
