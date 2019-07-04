@@ -154,9 +154,9 @@ class DNN:
                     }
 
                 outputs_rel = outputs[0].eval(feed_dict=feed_dict_train)
-                final_states_rel = final_states[0].eval(feed_dict=feed_dict_train)
+                final_states_rel = final_states[0].h.eval(feed_dict=feed_dict_train)
                 print(outputs_rel)
-                print(final_states_rel.h)
+                print(final_states_rel)
                 # print(output_states[0].c.shape)
                 # print(output_states[0].h.shape)
                 # print(output_states[1].c.shape)
