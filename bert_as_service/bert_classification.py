@@ -108,26 +108,26 @@ class DNN:
             # outputs = tf.transpose(outputs, [1, 0, 2])
 
 
-        # with tf.name_scope("dense"):
-        #     dense = tf.layers.dense(inputs=fin_outputs, units=self.hidden_dense, activation=tf.nn.relu, \
-        #                             kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
-        #     drop_dense = tf.layers.dropout(dense, rate=self.dropout, training=True)
-        #     y_pred = tf.layers.dense(inputs=drop_dense, units=self.label, activation=tf.nn.softmax, \
-        #                              kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
-        #
-        # with tf.name_scope("Loss"):
-        #     logloss = -tf.reduce_mean(tf.log(y_pred) * self.target) \
-        #               + tf.losses.get_regularization_loss()
-        #     tf.summary.scalar('loss', logloss)
-        #
-        # with tf.name_scope("training_op"):
-        #     optimizer = tf.train.AdamOptimizer(self.lr)
-        #     training_op = optimizer.minimize(logloss)
-        #
-        # # Summary
-        # merged_summary = tf.summary.merge_all()
-        # self.mkdir(self.logdir)
-        # summary_writer = tf.summary.FileWriter(self.logdir, tf.get_default_graph())
+        with tf.name_scope("dense"):
+            dense = tf.layers.dense(inputs=fin_outputs, units=self.hidden_dense, activation=tf.nn.relu, \
+                                    kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
+            drop_dense = tf.layers.dropout(dense, rate=self.dropout, training=True)
+            y_pred = tf.layers.dense(inputs=drop_dense, units=self.label, activation=tf.nn.softmax, \
+                                     kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
+
+        with tf.name_scope("Loss"):
+            logloss = -tf.reduce_mean(tf.log(y_pred) * self.target) \
+                      + tf.losses.get_regularization_loss()
+            tf.summary.scalar('loss', logloss)
+
+        with tf.name_scope("training_op"):
+            optimizer = tf.train.AdamOptimizer(self.lr)
+            training_op = optimizer.minimize(logloss)
+
+        # Summary
+        merged_summary = tf.summary.merge_all()
+        self.mkdir(self.logdir)
+        summary_writer = tf.summary.FileWriter(self.logdir, tf.get_default_graph())
 
         # init
         init = tf.global_variables_initializer()
@@ -157,7 +157,7 @@ class DNN:
 
                 print(fw_final_states.eval(feed_dict=feed_dict_train).shape)
                 print(bw_final_states.eval(feed_dict=feed_dict_train).shape)
-                print(fin_outputs.eval(feed_dict=feed_dict_train).shape)
+                print(y_pred.eval(feed_dict=feed_dict_train).shape)
             #         sess.run(training_op, feed_dict_train)
             #         e, summary = sess.run([logloss, merged_summary], feed_dict_train)
             #         loss_epoch.append(e)
