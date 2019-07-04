@@ -8,7 +8,7 @@
 from bert_serving.client import BertClient
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, auc
 from sklearn.preprocessing import OneHotEncoder
 import tensorflow as tf
 import os
@@ -29,6 +29,8 @@ class DNN:
         self.N = 10
         self.vet_size = 768
         self.max_sen_len = 25
+        self.lstm_hidden_size = 300
+        self.hidden_dense = 512
 
         with tf.name_scope("inputs"):
             self.target = tf.placeholder(tf.float32, shape=(None, self.label), name="target")
@@ -80,8 +82,29 @@ class DNN:
         #     title_feature = tf.reshape(tf.gather(embeddings, self.title), (-1, self.embed_size))
         #     feature = tf.concat([prefix_feature, title_feature, self.tag], 1)
 
+        with tf.name_scope("BiLSTM"):
+            # bi-lstm
+            lstm_fw_cell = tf.contrib.rnn.BasicLSTMCell(self.lstm_hidden_size)
+            lstm_bw_cell = tf.contrib.rnn.BasicLSTMCell(self.lstm_hidden_size)
+
+            init_fw = lstm_fw_cell.zero_state(self.batch_size, dtype=tf.float32)
+            init_bw = lstm_bw_cell.zero_state(self.batch_size, dtype=tf.float32)
+
+            # weights = tf.get_variable("weights", [2 * self.hidden_size, self.output], dtype=tf.float32,  # 注意这里的维度
+            #                           initializer=tf.random_normal_initializer(mean=0, stddev=1))
+            # biases = tf.get_variable("biases", [n_classes], dtype=tf.float32,
+            #                          initializer=tf.random_normal_initializer(mean=0, stddev=1))
+
+            # the para: time_major => [max_time, batch_size, depth]
+            outputs, final_states = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell, \
+                    self.feature, initial_state_fw=init_fw, initial_state_bw=init_bw, time_major=True)
+
+            # concat the fw and bw
+            outputs = tf.concat(outputs, 1)
+
+
         with tf.name_scope("dense"):
-            dense = tf.layers.dense(inputs=self.feature, units=512, activation=tf.nn.relu, \
+            dense = tf.layers.dense(inputs=outputs, units=self.hidden_dense, activation=tf.nn.relu, \
                                     kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularizer))
             drop_dense = tf.layers.dropout(dense, rate=self.dropout, training=True)
             y_pred = tf.layers.dense(inputs=drop_dense, units=self.label, activation=tf.nn.softmax, \
