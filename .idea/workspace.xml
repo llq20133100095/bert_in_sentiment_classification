@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0107309d-ef7b-409e-b184-c8e753e46e46" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/bert_as_service/bert_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/bert_as_service/bert_classification.py" afterDir="false" />
-    </list>
+    <list default="true" id="0107309d-ef7b-409e-b184-c8e753e46e46" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bert_as_service/bert_classification.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+            <state relative-caret-position="286">
+              <caret line="168" column="24" lean-forward="true" selection-start-line="168" selection-start-column="24" selection-end-line="195" selection-end-column="50" />
               <folding>
                 <element signature="e#116#158#0" expanded="true" />
               </folding>
@@ -240,12 +238,12 @@
       <option name="presentableId" value="Default" />
       <updated>1561970394938</updated>
       <workItem from="1561970396148" duration="3941000" />
-      <workItem from="1562062243001" duration="34551000" />
+      <workItem from="1562062243001" duration="34757000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38492000" />
+    <option name="totallyTimeSpent" value="38698000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -381,8 +379,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bert_as_service/bert_classification.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+        <state relative-caret-position="286">
+          <caret line="168" column="24" lean-forward="true" selection-start-line="168" selection-start-column="24" selection-end-line="195" selection-end-column="50" />
           <folding>
             <element signature="e#116#158#0" expanded="true" />
           </folding>
