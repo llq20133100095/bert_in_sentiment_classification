@@ -34,7 +34,7 @@ class DNN:
 
         with tf.name_scope("inputs"):
             self.target = tf.placeholder(tf.float32, shape=(None, self.label), name="target")
-            self.feature = tf.placeholder(tf.float32, shape=(None, self.vet_size), name="input")
+            self.feature = tf.placeholder(tf.float32, shape=(None, self.max_sen_len, self.vet_size), name="input")
             self.dropout = tf.placeholder(tf.float32, name="dropout")
 
     def mkdir(self, path):
