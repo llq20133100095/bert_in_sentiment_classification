@@ -157,6 +157,7 @@ class DNN:
 
                 print(fw_final_states.eval(feed_dict=feed_dict_train).shape)
                 print(bw_final_states.eval(feed_dict=feed_dict_train).shape)
+                print(fin_outputs.eval(feed_dict=feed_dict_train).shape)
             #         sess.run(training_op, feed_dict_train)
             #         e, summary = sess.run([logloss, merged_summary], feed_dict_train)
             #         loss_epoch.append(e)
