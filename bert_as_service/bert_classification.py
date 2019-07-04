@@ -155,9 +155,6 @@ class DNN:
                         self.dropout: 0.5,
                     }
 
-                # print(fw_final_states.eval(feed_dict=feed_dict_train).shape)
-                # print(bw_final_states.eval(feed_dict=feed_dict_train).shape)
-                # print(y_pred.eval(feed_dict=feed_dict_train).shape)
                     sess.run(training_op, feed_dict_train)
                     e, summary = sess.run([logloss, merged_summary], feed_dict_train)
                     loss_epoch.append(e)
@@ -168,17 +165,24 @@ class DNN:
 
                 # val:
                 loss_epoch = []
-                feed_dict_val = {
-                    self.feature: x_val,
-                    self.target: y_val,
-                    self.dropout: 0.0,
-                }
+                y_val_true = np.zeros((1, self.label))
+                y_val_pre = np.zeros((1, self.label))
+                for batch in self.iterate_minibatches(x_val, y_val, self.batch_size, shuffle=False):
+                    x, y = batch
+                    feed_dict_val = {
+                        self.feature: x,
+                        self.target: y,
+                        self.dropout: 0.0,
+                    }
 
-                e = logloss.eval(feed_dict=feed_dict_val)
-                loss_epoch.append(e)
-                ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
 
-                f1_sco = f1_score(np.argmax(y_val, axis=1), np.argmax(ypred_val, axis=1), average='macro')
+                    e = logloss.eval(feed_dict=feed_dict_val)
+                    loss_epoch.append(e)
+                    ypred_val = sess.run(y_pred, feed_dict=feed_dict_val)
+                    y_val_true = np.concatenate((y_val_true, y_val), axis=0)
+                    y_val_pre = np.concatenate((y_val_pre, ypred_val), axis=0)
+
+                f1_sco = f1_score(np.argmax(y_val_true[1:], axis=1), np.argmax(y_val_pre[1:], axis=1), average='macro')
                 print("val loss: %f" % np.mean(loss_epoch))
                 print("f1_score: %f" % f1_sco)
 
