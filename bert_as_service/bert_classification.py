@@ -15,6 +15,17 @@ import os
 import time
 import numpy as np
 
+from bert_serving.server.helper import get_args_parser
+from bert_serving.server import BertServer
+args = get_args_parser().parse_args(['-model_dir', '/data1/zhangxiang2/liluoqin/bert_as_service/chinese_L-12_H-768_A-12',
+                                     '-port', '5555',
+                                     '-port_out', '5556',
+                                     '-max_seq_len', 'NONE',
+                                     '-pooling_strategy', 'NONE',
+                                     '-mask_cls_sep'])
+server = BertServer(args)
+server.start()
+
 class DNN:
 
     def __init__(self):
@@ -100,13 +111,11 @@ class DNN:
             outputs, final_states = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell, \
                     self.feature, initial_state_fw=init_fw, initial_state_bw=init_bw)
 
-
             # concat the fw and bw
             fw_final_states = final_states[0].h
             bw_final_states = final_states[1].h
             fin_outputs = tf.concat((fw_final_states, bw_final_states), 1)
             # outputs = tf.transpose(outputs, [1, 0, 2])
-
 
         with tf.name_scope("dense"):
             dense = tf.layers.dense(inputs=fin_outputs, units=self.hidden_dense, activation=tf.nn.relu, \
@@ -186,18 +195,18 @@ class DNN:
                 print("val loss: %f" % np.mean(loss_epoch))
                 print("f1_score: %f" % f1_sco)
 
-                # saver = tf.train.Saver()
-                # self.mkdir(self.checking_point_dir)
-                # saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
-                # print("time: %f s" % (time.time() - start))
-                #
-                # # get best f1_score
-                # if(best_f1_score < f1_sco):
-                #     best_f1_score = f1_sco
-                #     best_epoch = epoch
+                saver = tf.train.Saver()
+                self.mkdir(self.checking_point_dir)
+                saver.save(sess, os.path.join(self.checking_point_dir, "dnn"), global_step=epoch)
+                print("time: %f s" % (time.time() - start))
 
-            # print("best_f1_score: %f" % best_f1_score)
-            # print("best_epoch: %d" % best_epoch)
+                # get best f1_score
+                if(best_f1_score < f1_sco):
+                    best_f1_score = f1_sco
+                    best_epoch = epoch
+
+            print("best_f1_score: %f" % best_f1_score)
+            print("best_epoch: %d" % best_epoch)
 
 
 if __name__ == "__main__":
