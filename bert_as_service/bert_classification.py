@@ -15,16 +15,16 @@ import os
 import time
 import numpy as np
 
-from bert_serving.server.helper import get_args_parser
-from bert_serving.server import BertServer
-args = get_args_parser().parse_args(['-model_dir', '/data1/zhangxiang2/liluoqin/bert_as_service/chinese_L-12_H-768_A-12',
-                                     '-port', '5555',
-                                     '-port_out', '5556',
-                                     '-max_seq_len', 'NONE',
-                                     '-pooling_strategy', 'NONE',
-                                     '-mask_cls_sep'])
-server = BertServer(args)
-server.start()
+# from bert_serving.server.helper import get_args_parser
+# from bert_serving.server import BertServer
+# args = get_args_parser().parse_args(['-model_dir', '/data1/zhangxiang2/liluoqin/bert_as_service/chinese_L-12_H-768_A-12',
+#                                      '-port', '5555',
+#                                      '-port_out', '5556',
+#                                      '-max_seq_len', 'NONE',
+#                                      '-pooling_strategy', 'NONE',
+#                                      '-mask_cls_sep'])
+# server = BertServer(args)
+# server.start()
 
 class DNN:
 

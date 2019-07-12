@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0107309d-ef7b-409e-b184-c8e753e46e46" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bert_as_service/bert_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/bert_as_service/bert_classification.py" afterDir="false" />
-    </list>
+    <list default="true" id="0107309d-ef7b-409e-b184-c8e753e46e46" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bert_as_service/bert_classification.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+            <state relative-caret-position="208">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
               <folding>
                 <element signature="e#116#158#0" expanded="true" />
               </folding>
@@ -40,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bert_as_service/example_bert_use.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1118">
+            <state relative-caret-position="260">
               <caret line="52" column="62" selection-start-line="52" selection-start-column="62" selection-end-line="52" selection-end-column="62" />
               <folding>
                 <element signature="e#341#352#0" expanded="true" />
@@ -53,8 +50,8 @@
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="182">
-                <caret line="7" column="44" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="44" />
+              <first_editor relative-caret-position="390">
+                <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
               </first_editor>
               <second_editor />
             </state>
@@ -244,12 +241,12 @@
       <updated>1561970394938</updated>
       <workItem from="1561970396148" duration="3941000" />
       <workItem from="1562062243001" duration="43151000" />
-      <workItem from="1562917243652" duration="1199000" />
+      <workItem from="1562917243652" duration="3726000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48291000" />
+    <option name="totallyTimeSpent" value="50818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -368,7 +365,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bert_as_service/example_bert_use.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1118">
+        <state relative-caret-position="260">
           <caret line="52" column="62" selection-start-line="52" selection-start-column="62" selection-end-line="52" selection-end-column="62" />
           <folding>
             <element signature="e#341#352#0" expanded="true" />
@@ -379,8 +376,8 @@
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="182">
-            <caret line="7" column="44" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="44" />
+          <first_editor relative-caret-position="390">
+            <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
           </first_editor>
           <second_editor />
         </state>
@@ -388,8 +385,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bert_as_service/bert_classification.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+        <state relative-caret-position="208">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
           <folding>
             <element signature="e#116#158#0" expanded="true" />
           </folding>
