@@ -5,9 +5,9 @@
 ```angular2
 cd /home/zhangxiang2/.local/bin
 字向量:
-python3 bert-serving-start -pooling_strategy NONE -model_dir ~/liluoqin/bert_as_service/chinese_L-12_H-768_A-12 -num_worker=4
+python3 bert-serving-start -pooling_strategy NONE -model_dir /data1/zhangxiang2/liluoqin/bert_as_service/chinese_L-12_H-768_A-12 -num_worker=4
 句向量：
-python3 bert-serving-start -model_dir ~/liluoqin/bert_as_service/chinese_L-12_H-768_A-12 -num_worker=4
+python3 bert-serving-start -model_dir /data1/zhangxiang2/liluoqin/bert_as_service/chinese_L-12_H-768_A-12 -num_worker=4
 ```
 
 - 其中“chinese_L-12_H-768_A-12”是bert预训练好的模型
@@ -25,6 +25,9 @@ python3 download_glue_data.py --data_dir glue_data --tasks all
 ### 1.2 example_bert_use.py
 
 - 使用bert构建分类器的例子
+
+### 1.3 bert_classification.py 
+- bert分类器的主代码入口
 
 ## 2.代码
 
